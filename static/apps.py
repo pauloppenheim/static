@@ -16,8 +16,6 @@ from wsgiref import util
 
 from pkg_resources import resource_filename, Requirement
 
-import pystache
-
 
 class MagicError(Exception):
     pass
@@ -345,6 +343,7 @@ class MoustacheMagic(StringMagic):
 
     def body(self, environ, file_like):
         """Pass environ and **self.variables into the template."""
+        import pystache
         return [pystache.Renderer().render(file_like.read(),
                                            environ=environ,
                                            **self.variables).encode('utf-8')]
